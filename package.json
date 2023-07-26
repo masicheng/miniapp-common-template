@@ -1,0 +1,23 @@
+{
+  "name": "wx-request",
+  "version": "0.0.1",
+  "description": "wx.request",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/masicheng/wx-request.git"
+  },
+  "keywords": [
+    "wx.requset",
+    "miniapp"
+  ],
+  "author": "masicheng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/masicheng/wx-request/issues"
+  },
+  "homepage": "https://github.com/masicheng/wx-request#readme"
+}
