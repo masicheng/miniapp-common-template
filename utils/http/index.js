@@ -98,7 +98,6 @@ const transform = {
   // 请求之前处理config
   beforeRequestHook: (config, options) => {
     const { apiUrl, joinPrefix, joinParamsToUrl, formatDate, joinTime = true, isCache = false, urlPrefix } = options;
-
     if (joinPrefix) {
       config.url = `${urlPrefix}${config.url}`;
     }
@@ -152,7 +151,6 @@ const transform = {
   requestInterceptors: (config, options) => {
     // 请求之前处理config
     const token = getToken();
-
     if (token && config?.requestOptions?.withToken !== false) {
       // jwt token
       config.headers.Authorization = options.authenticationScheme ? `${options.authenticationScheme} ${token}` : token;
@@ -175,9 +173,6 @@ const transform = {
     const msg = response?.data?.error?.message ?? "";
     const err = error?.toString?.() ?? "";
     let errMessage = "";
-    if (axios.isCancel(error)) {
-      return Promise.reject(error);
-    }
     try {
       if (code === "ECONNABORTED" && message.indexOf("timeout") !== -1) {
         errMessage = MessageEnum.timeoutMessage;
@@ -185,7 +180,6 @@ const transform = {
       if (err?.includes("Network Error")) {
         errMessage = MessageEnum.networkExceptionMsg;
       }
-
       if (errMessage) {
         if (errorMessageMode === "modal") {
           wx.showModal({
@@ -204,15 +198,14 @@ const transform = {
     } catch (error) {
       throw new Error(error);
     }
-
-    checkStatus(error?.response?.code, msg, errorMessageMode);
+    checkStatus(response?.status, msg, errorMessageMode);
 
     // 添加自动重试机制 保险起见 只针对GET请求
     const retryRequest = new AxiosRetry();
     const { isOpenRetry } = config.requestOptions.retryRequest;
     config.method?.toUpperCase() === RequestEnum.GET &&
       isOpenRetry &&
-      // @ts-ignore 
+      // @ts-ignore
       retryRequest.retry(axiosInstance, error);
     return Promise.reject(error);
   },
@@ -232,7 +225,9 @@ function createAxios(opt) {
         // 如果是form-data格式
         headers: {
           post: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
-          get: { "Content-Type": "application/json" },
+        },
+        validateStatus(status) {
+          return status === 200;
         },
         // 数据处理方式
         transform: cloneDeep(transform),
@@ -271,5 +266,6 @@ function createAxios(opt) {
     )
   );
 }
+
 // defHttp.default.baseURL = globConfig.baseUrl;
 export const defHttp = createAxios();

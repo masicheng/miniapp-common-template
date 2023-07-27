@@ -35,7 +35,6 @@ export class WAxios {
       // If cancel repeat request is turned on, then cancel repeat request is prohibited
       const { requestOptions } = config; //this.options;
       const ignoreCancelToken = requestOptions?.ignoreCancelToken ?? true;
-      console.log(ignoreCancelToken);
       !ignoreCancelToken && axiosCanceler.addPending(config);
       if (requestInterceptors && isFunction(requestInterceptors)) {
         config = requestInterceptors(config, this.options);
@@ -98,7 +97,7 @@ export class WAxios {
 
     return {
       ...config,
-      data: qs.stringify(config.data, { arrayFormat: "brackets" }),
+      // data: qs.stringify(config.data, { arrayFormat: "brackets" }),
     };
   }
 
@@ -121,7 +120,7 @@ export class WAxios {
 
     conf.requestOptions = opt;
 
-    conf = this.supportFormData(conf);
+    // conf = this.supportFormData(conf);
 
     return new Promise((resolve, reject) => {
       // 获取缓存数据
@@ -131,7 +130,7 @@ export class WAxios {
           return resolve(cache);
         }
       }
-      this.requestTask = this.axiosInstance
+      this.axiosInstance
         .request(conf)
         .then((res) => {
           if (transformResponseHook && isFunction(transformResponseHook)) {
@@ -150,15 +149,13 @@ export class WAxios {
           resolve(res);
         })
         .catch((e) => {
-          if (axios.isAxiosError(e)) {
-            console.log("isAxiosError", e);
-            // rewrite error message from axios in here
-          } else if (axios.isCancel(e)) {
-            console.log("isCancelError", e);
-            return;
-          }
           if (requestCatchHook && isFunction(requestCatchHook)) {
             reject(requestCatchHook(e, opt));
+            return;
+          }
+          if (axios.isAxiosError(e)) {
+            // rewrite error message from axios in here
+          } else if (axios.isCancel(e)) {
             return;
           }
           reject(e);
