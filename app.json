@@ -11,6 +11,7 @@
   "resolveAlias": {
     "~/*": "/*",
     "@utils/*": "utils/*",
-    "@page/*": "pages/*"
+    "@page/*": "pages/*",
+    "@api/*": "api/*"
   }
 }
