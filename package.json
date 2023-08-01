@@ -1,14 +1,14 @@
 {
-  "name": "wx-request",
+  "name": "miniapp-template",
   "version": "0.0.1",
-  "description": "wx.request",
+  "description": "miniapp-template",
   "main": ".eslintrc.js",
   "scripts": {
     "test": "test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/masicheng/wx-request.git"
+    "url": "git+https://github.com/masicheng/miniapp-template.git"
   },
   "keywords": [
     "wx.requset",
@@ -17,11 +17,12 @@
   "author": "masicheng",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/masicheng/wx-request/issues"
+    "url": "https://github.com/masicheng/miniapp-template/issues"
   },
-  "homepage": "https://github.com/masicheng/wx-request#readme",
+  "homepage": "https://github.com/masicheng/miniapp-templatet#readme",
   "dependencies": {
     "axios-miniprogram": "^2.5.0",
+    "dayjs": "^1.11.9",
     "lodash": "^4.17.21"
   }
 }

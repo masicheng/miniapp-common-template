@@ -1,8 +1,6 @@
 // index.js
 // 获取应用实例
 const app = getApp();
-import { loginNew } from "@api/sys/user";
-import { getDictItemsByFldm } from "@api/sys/core";
 Page({
   data: {
     motto: "Hello World",
@@ -18,13 +16,7 @@ Page({
       url: "../logs/logs",
     });
   },
-  onLoad() {
-    if (wx.getUserProfile) {
-      this.setData({
-        canIUseGetUserProfile: true,
-      });
-    }
-  },
+  onLoad() {},
   getUserProfile(e) {
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
     wx.getUserProfile({
@@ -45,16 +37,5 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true,
     });
-  },
-  login() {
-    // loginNew({ mobile: "18011850855", code: "HAODA@12345", scope: "all", ssxt: "zqr" }).then((res) => {
-    //   console.log(res);
-    // });
-    getDictItemsByFldm({ fldm: "br_zq_cllx" }).then((res) => {
-      console.log(res);
-    });
-    // getDictItemsByFldm({ fldm: "br_zq_cllx" }).then((res) => {
-    //   console.log(res);
-    // });
   },
 });

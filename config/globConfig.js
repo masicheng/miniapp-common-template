@@ -4,7 +4,7 @@ const {
 const url = (function () {
   switch (envVersion) {
     case "develop":
-      return "http://172.16.0.172";
+      return "";
     case "trial":
       return "";
     case "release":
@@ -13,7 +13,7 @@ const url = (function () {
 })();
 const globConfig = {
   baseUrl: url,
-  apiUrl: "/hd-api",
+  apiUrl: "",
   urlPrefix: "",
   uploadUrl: "",
   downloadUrl: "",
