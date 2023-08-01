@@ -1,8 +1,7 @@
 import { WAxios } from "./Axios";
-import { deepMerge } from "./utils";
+import { deepMerge, joinTimestamp, formatRequestDate } from "./util";
 import { cloneDeep, isString, isNull, isEmpty } from "lodash";
 import globConfig from "../../config/globConfig";
-import { joinTimestamp, formatRequestDate } from "./helper";
 import { checkStatus } from "./checkStatus";
 import { AxiosRetry } from "./axiosRetry";
 import axios from "axios-miniprogram";
